@@ -1,0 +1,6 @@
+[submodule "2_individual_assay_analyses/2_analyses/imaging/1_snakemake_pipeline/2025_varchamp_snakemake"]
+	path = 2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/2025_varchamp_snakemake
+	url = git@github.com:broadinstitute/2025_varchamp_snakemake.git
+[submodule "2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/2025_varchamp_snakemake"]
+	path = 2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/2025_varchamp_snakemake
+	url = git@github.com:broadinstitute/2025_varchamp_snakemake.git
