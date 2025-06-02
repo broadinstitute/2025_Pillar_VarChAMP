@@ -1,0 +1,15 @@
+## Should ONLY be run when located 8.2_updated_snakemake_pipeline
+configfile: "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/run_snakemake_pipeline/configs/2025_01_27_Batch_13.json"
+
+include: "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/2025_varchamp_snakemake/2.snakemake_pipeline/rules/common.smk"
+include: "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/2025_varchamp_snakemake/2.snakemake_pipeline/rules/preprocess.smk"
+include: "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/2_analyses/1_snakemake_pipeline/2025_varchamp_snakemake/2.snakemake_pipeline/rules/analysis.smk"
+
+BATCH = config["Metadata_Batch"]
+PIPELINE = config["pipeline"]
+inputs = config["input_dir"]
+outputs = config["output_dir"]
+
+rule all:
+    input:
+        f"{outputs}/classification_analyses/{BATCH}/{PIPELINE}/metrics.csv"
