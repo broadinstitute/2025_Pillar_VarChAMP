@@ -1,0 +1,18 @@
+{
+    "input_dir": "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/1_inputs/1_snakemake_pipeline/inputs",
+    "output_dir": "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/3_outputs/1_snakemake_pipeline/pipeline_outputs",
+    "Metadata_Batch": "2025_01_27_Batch_13",
+    "pipeline": "profiles_tcdropped_filtered_var_mad_outlier_featselect_filtcells",
+    "cell_count_col": "Metadata_Object_Count",
+    "transfection_col": "Metadata_node_type",
+    "trasfection_pert": ["TC"],
+    "TC": ["EGFP"],
+    "NC": ["RHEB", "MAPK9", "PRKACB", "SLIRP"],
+    "PC": ["ALK", "ALK_Arg1275Gln", "PTK2B"],
+    "cPC": ["KRAS", "PTK2B", "GHSR", "ABL1", "BRD4", "OPRM1", "RB1", "ADA", "WT PMP22", "LYN", "TNF", "CYP2A6", "CSK", "PAK1", "ALDH2", "CHRM3", "KCNQ2", "ALK T1151M", "PRKCE", "LPAR1", "PLP1"],
+    "cc_threshold": 20,
+    "plate_layout": "single_rep",
+    "trn_imbal_thres": 3,
+    "min_num_classifier": 2,
+    "parallel": true
+}
