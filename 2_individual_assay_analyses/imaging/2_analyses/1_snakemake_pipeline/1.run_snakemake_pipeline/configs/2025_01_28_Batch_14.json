@@ -1,6 +1,6 @@
 {
     "input_dir": "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/1_inputs/1_snakemake_pipeline/inputs",
-    "output_dir": "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/3_outputs/1_snakemake_pipeline/pipeline_outputs",
+    "output_dir": "/home/shenrunx/igvf/varchamp/2025_Pillar_VarChAMP/2_individual_assay_analyses/imaging/3_outputs/1_snakemake_pipeline/2.sm_pipeline_outputs",
     "Metadata_Batch": "2025_01_28_Batch_14",
     "pipeline": "profiles_tcdropped_filtered_var_mad_outlier_featselect_filtcells",
     "cell_count_col": "Metadata_Object_Count",
