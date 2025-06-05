@@ -200,11 +200,15 @@ def plot_platemap(
     return plate
 
 
-def plot_allele(pm, variant, sel_channel, plate_img_qc, site="05", ref_well=[], var_well=[], max_intensity=0.99, display=False, imgs_dir="", output_dir=""):
+def plot_allele(pm, variant, sel_channel, plate_img_qc, auroc_df=None, site="05", ref_well=[], var_well=[], max_intensity=0.99, display=False, imgs_dir="", output_dir=""):
     assert imgs_dir != "", "Image directory has to be input!"
     plt.clf()
     cmap = channel_to_cmap(sel_channel)
     channel = channel_dict[sel_channel]
+    if auroc_df is not None:
+        auroc = auroc_df.filter(pl.col("allele_0")==variant)["AUROC_Mean"].mean()
+    else:
+        auroc = ""
     
     ## get the number of wells/images per allele
     plate_map = pm.filter(pl.col("gene_allele") == variant).select("plate_map_name").to_pandas().values.flatten()
@@ -305,5 +309,8 @@ def plot_allele(pm, variant, sel_channel, plate_img_qc, site="05", ref_well=[], 
     if display:
         plt.show()
     if output_dir:
-        fig.savefig(os.path.join(output_dir, f"{variant}_{sel_channel}.png"), dpi=400, bbox_inches='tight')
+        if auroc:
+            fig.savefig(os.path.join(output_dir, f"{variant}_{sel_channel}_{auroc:.3f}.png"), dpi=400, bbox_inches='tight')
+        else:
+            fig.savefig(os.path.join(output_dir, f"{variant}_{sel_channel}.png"), dpi=400, bbox_inches='tight')
         plt.close(fig)
