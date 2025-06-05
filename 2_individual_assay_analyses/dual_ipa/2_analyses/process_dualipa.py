@@ -96,6 +96,7 @@ def get_wt_variability_d_median(pDEST_DUAL_median_df,pDEST_DUAL_df):
     wt_median_d = {(orf_id, pla):median_ratio for i, (orf_id, pla, median_ratio, n_wt) in wt_median_df.query("n_wt >= 2").iterrows()}
     return wt_median_d, wt_ratio_l_median
 
+
 def wt_log2fc_variability(pDEST_DUAL_avg_df, pDEST_DUAL_df):
     '''
     Maxime addition
