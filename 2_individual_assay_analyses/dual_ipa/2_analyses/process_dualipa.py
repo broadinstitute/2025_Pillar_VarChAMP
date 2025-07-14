@@ -147,12 +147,10 @@ def get_pDEST_DUAL_avg_allele_df(pDEST_DUAL_avg_df, wt_avg_d, wt_ratio_l, wt_std
     pDEST_DUAL_avg_allele_df['allele_wt_log2fc'] = np.log2(pDEST_DUAL_avg_allele_df['allele_wt_ratio'])
     pDEST_DUAL_avg_allele_df['allele_wt_log2fc_zscore'] = pDEST_DUAL_avg_allele_df.allele_wt_log2fc.apply(
         lambda x: (x - wt_mean) / wt_std
-        )
-
+    )
     pDEST_DUAL_avg_allele_df['allele_wt_log2fc_pvalue'] = pDEST_DUAL_avg_allele_df['allele_wt_log2fc_zscore'].apply(
         lambda z: 2 * norm.sf(np.abs(z))
-        )
-    
+    )
     
     # Jess add
     wt_log = np.log2(wt_ratio_l)
