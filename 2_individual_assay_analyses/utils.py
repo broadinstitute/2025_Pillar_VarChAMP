@@ -8,8 +8,8 @@ import glob
 import gzip
 import re
 import os
-import py3Dmol
-from Bio.PDB import PDBParser
+# import py3Dmol
+# from Bio.PDB import PDBParser
 
 set2_palette = sns.color_palette("Set2")
 
