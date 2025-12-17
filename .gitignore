@@ -198,9 +198,11 @@ cython_debug/
 # Large files - anything stored in raw_inputs folder
 **/raw_inputs/
 **/.snakemake/
+**/*_sc_profiles_*.parquet
 
 # specific large files
 facs_single_cell.parquet
 varchamp_alleles_with_pillar_annotations.tsv
 pillar_alleles_with_varchamp_annotations.tsv
+pillar_snp_alleles.tsv
 
