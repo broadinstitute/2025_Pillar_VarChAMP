@@ -343,7 +343,104 @@ def plot_auroc_curves(df_clinvar_w_scores, pos_label, methods, set2_palette=set2
     return ap_results ## , sig_results_dict
 
 
-def plot_gene_level_summary(assay_df, assay, xlim=None, cat="clinvar_clnsig_clean", palette=None, ax=None):
+def plot_assay_hit_by_category_perc(df, hit_col, cat_cols, title="", ax=None):
+    """
+    plot_assay_hit_by_category
+    ==========================
+    
+    Create a stacked horizontal bar chart showing hit rate percentage per category.
+    Each bar represents 100% of the category, with the hit portion highlighted.
+    
+    Parameters
+    ----------
+    df : polars.DataFrame
+        Input table containing at least the columns listed in `cat_cols` and a
+        boolean column indicating hits.
+    hit_col : str
+        Name of the boolean column that flags hits (e.g. `"is_hit"`).
+    cat_cols : str or list[str]
+        Column(s) that define the categorical grouping(s).  If a single string is
+        supplied it is handled automatically.
+    title : str, optional
+        Title placed above the plot.
+    ax : matplotlib.axes.Axes, optional
+        Pre-existing axes to draw on.  If None, a new figure and axes are created.
+    
+    Returns
+    -------
+    polars.DataFrame
+        A tidy frame with one row per category, containing:
+            - the grouping key(s)
+            - total_counts   : total observations in that category
+            - hit_counts     : observations that were hits
+            - hit_perc       : hit rate in percent (hit_counts / total_counts * 100)
+    """
+    # --- compute hit counts and percentages ---
+    df_tot_cnt_per_cat = (
+        df.group_by(cat_cols)
+        .len()
+        .rename({"len": "total_counts"})
+    )
+    df_hit_cnt_per_cat = (
+        df.unique("gene_variant")
+        .filter(pl.col(hit_col))
+        .group_by(cat_cols)
+        .len()
+        .rename({"len": "hit_counts"})
+    )
+
+    cat_col_name = cat_cols if isinstance(cat_cols, str) else cat_cols[-1]
+    
+    img_hits_perc_df = (
+        df_tot_cnt_per_cat.join(
+            df_hit_cnt_per_cat,
+            on=cat_cols,
+            how="left"
+        )
+        .fill_null(0)
+        .with_columns(
+            (pl.col("hit_counts") / pl.col("total_counts") * 100).alias("hit_perc")
+        )
+        .sort(cat_col_name, descending=True)
+    )
+
+    # --- plotting ---
+    if ax is None:
+        _, ax = plt.subplots(1, 1, figsize=(5, img_hits_perc_df.shape[0]))
+
+    plot_df = img_hits_perc_df.to_pandas()
+    y_positions = range(len(plot_df))
+
+    # background bars (full 100% - gray)
+    ax.barh(y_positions, [100] * len(plot_df), color='#00A3A3', label="Non-hit")
+    # hit bars (foreground - red)
+    ax.barh(y_positions, plot_df["hit_perc"], color='#E67300', label="Hit")
+
+    # set labels
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels([f"{cat}\n(n={n})" for cat, n in zip(plot_df[cat_col_name], plot_df["total_counts"])]) ##.split('_')[1]
+    ax.set_xlabel("Percentage (%)")
+    ax.set_xlim(0, 100)
+    ax.set_title(title)
+    ax.grid(axis='x', alpha=.2)
+    ax.legend(loc='lower right')
+
+    # percentage annotations - positioned at the end of hit bar
+    for idx, row in plot_df.iterrows():
+        ax.text(
+            row["hit_perc"] + 1,
+            idx,
+            f"{row['hit_perc']:.1f}%",
+            va="center",
+            ha="left",
+            fontweight="bold",
+            fontsize=11,
+            color="white"
+        )
+    return img_hits_perc_df
+
+
+def plot_gene_level_summary(assay_df, assay, plot=False, ax=None, xlim=None, cat="clinvar_clnsig_clean", palette=None):
     gene_allele_cnts = assay_df.group_by(
         ["symbol"]
     ).len().rename(
@@ -372,99 +469,100 @@ def plot_gene_level_summary(assay_df, assay, xlim=None, cat="clinvar_clnsig_clea
         "total_counts_all", "symbol", cat, 
         descending=[True, True, False]
     )
-    genes_with_hits = total_allele_hit_sum_df.filter(pl.col("hit_perc")>0)["symbol"].unique()
-    
-    # Convert to pandas and sort
-    total_allele_hit_sum_df = total_allele_hit_sum_df.to_pandas().reset_index(drop=True)
-    n_genes = len(total_allele_hit_sum_df)
-    
-    # Add percentage labels
-    # Get unique categories and their positions
-    categories = total_allele_hit_sum_df[cat].unique()
-    n_categories = len(categories)
-    # Calculate bar positions for each category
-    bar_height = 0.8 / n_categories  # Default seaborn bar height divided by number of categories
-    
-    # Dynamically scale figure size
-    if ax is None:
-        fig_height = n_genes * bar_height * n_categories / 2.5
-        fig_width = 6  # Slightly wider to accommodate labels
-        fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+
+    if plot:
+        genes_with_hits = total_allele_hit_sum_df.filter(pl.col("hit_perc")>0)["symbol"].unique()
+        # Convert to pandas and sort
+        total_allele_hit_sum_df = total_allele_hit_sum_df.to_pandas().reset_index(drop=True)
+        n_genes = len(total_allele_hit_sum_df)
         
-    if palette is None:
-        palette = "Set2"
+        # Add percentage labels
+        # Get unique categories and their positions
+        categories = total_allele_hit_sum_df[cat].unique()
+        n_categories = len(categories)
+        # Calculate bar positions for each category
+        bar_height = 0.8 / n_categories  # Default seaborn bar height divided by number of categories
         
-    # Create the barplots
-    # Total counts (background bars)
-    sns.barplot(
-        data=total_allele_hit_sum_df, 
-        y="symbol", 
-        x="total_counts", 
-        hue=cat,  # "clinvar_clnsig_clean"
-        palette=palette,
-        alpha=0.4,  # Make background bars slightly transparent
-        ax=ax,
-        # gap=.1,
-        order=total_allele_hit_sum_df["symbol"].drop_duplicates(),
-    )
-    # Hit counts (foreground bars)
-    sns.barplot(
-        data=total_allele_hit_sum_df, 
-        y="symbol", 
-        x="hit_counts", 
-        hue=cat,#"clinvar_clnsig_clean", 
-        palette=palette,
-        ax=ax,
-        # gap=.1,
-        order=total_allele_hit_sum_df["symbol"].drop_duplicates()
-    )
-    for i, gene in enumerate(total_allele_hit_sum_df["symbol"].unique()):
-        gene_data = total_allele_hit_sum_df[total_allele_hit_sum_df["symbol"] == gene]
-        for j, category in enumerate(categories):
-            cat_data = gene_data[gene_data[cat] == category]
-            if not cat_data.empty:
-                # Calculate bar position
-                bar_center = i + (j - (n_categories - 1) / 2) * bar_height
-                # Get the hit percentage value
-                hit_perc = cat_data["hit_perc"].iloc[0]
-                hit_counts = cat_data["hit_counts"].iloc[0]
-                # Add percentage label at the end of the hit_counts bar
-                ax.text(
-                    hit_counts + max(total_allele_hit_sum_df["hit_counts"]) * 0.01,  # Small offset
-                    bar_center,
-                    f"{hit_perc:.1f}%",
-                    ha="left",
-                    va="center",
-                    fontsize=9 if n_genes > 20 else 10,
-                    fontweight="bold"
-                )
-    
-    # # Formatting
-    ax.grid(alpha=0.2, axis='x')
-    ax.set_xlabel("Count", fontsize=11)
-    ax.set_ylabel("Gene Symbol", fontsize=11)
-    ax.set_title(f"{assay}", fontsize=13)
-    
-    # Improve legend
-    handles, labels = ax.get_legend_handles_labels()
-    # Remove duplicate legend entries (seaborn creates duplicates with multiple barplots)
-    unique_labels = []
-    unique_handles = []
-    for handle, label in zip(handles, labels):
-        if label not in unique_labels:
-            unique_labels.append(label)
-            unique_handles.append(handle)
-    
-    ax.legend(unique_handles, unique_labels, 
-              title=cat, 
-              fontsize=10, 
-              loc="lower right",
-              framealpha=0.9)
-    if xlim:
-        ax.set_xlim(xlim)
+        # Dynamically scale figure size
+        if ax is None:
+            fig_height = n_genes * bar_height * n_categories / 2.5
+            fig_width = 6  # Slightly wider to accommodate labels
+            fig, ax = plt.subplots(figsize=(fig_width, fig_height))
+
+        if palette is None:
+            palette = "Set2"
+            
+        # Create the barplots
+        # Total counts (background bars)
+        sns.barplot(
+            data=total_allele_hit_sum_df, 
+            y="symbol", 
+            x="total_counts", 
+            hue=cat,  # "clinvar_clnsig_clean"
+            palette=palette,
+            alpha=0.4,  # Make background bars slightly transparent
+            ax=ax,
+            # gap=.1,
+            order=total_allele_hit_sum_df["symbol"].drop_duplicates(),
+        )
+        # Hit counts (foreground bars)
+        sns.barplot(
+            data=total_allele_hit_sum_df, 
+            y="symbol", 
+            x="hit_counts", 
+            hue=cat,#"clinvar_clnsig_clean", 
+            palette=palette,
+            ax=ax,
+            # gap=.1,
+            order=total_allele_hit_sum_df["symbol"].drop_duplicates()
+        )
+        for i, gene in enumerate(total_allele_hit_sum_df["symbol"].unique()):
+            gene_data = total_allele_hit_sum_df[total_allele_hit_sum_df["symbol"] == gene]
+            for j, category in enumerate(categories):
+                cat_data = gene_data[gene_data[cat] == category]
+                if not cat_data.empty:
+                    # Calculate bar position
+                    bar_center = i + (j - (n_categories - 1) / 2) * bar_height
+                    # Get the hit percentage value
+                    hit_perc = cat_data["hit_perc"].iloc[0]
+                    hit_counts = cat_data["hit_counts"].iloc[0]
+                    # Add percentage label at the end of the hit_counts bar
+                    ax.text(
+                        hit_counts + max(total_allele_hit_sum_df["hit_counts"]) * 0.01,  # Small offset
+                        bar_center,
+                        f"{hit_perc:.1f}%",
+                        ha="left",
+                        va="center",
+                        fontsize=9 if n_genes > 20 else 10,
+                        fontweight="bold"
+                    )
         
-    # plt.tight_layout()
-    # plt.show()
+        # # Formatting
+        ax.grid(alpha=0.2, axis='x')
+        ax.set_xlabel("Count", fontsize=11)
+        ax.set_ylabel("Gene Symbol", fontsize=11)
+        ax.set_title(f"{assay}", fontsize=13)
+        
+        # Improve legend
+        handles, labels = ax.get_legend_handles_labels()
+        # Remove duplicate legend entries (seaborn creates duplicates with multiple barplots)
+        unique_labels = []
+        unique_handles = []
+        for handle, label in zip(handles, labels):
+            if label not in unique_labels:
+                unique_labels.append(label)
+                unique_handles.append(handle)
+        
+        ax.legend(unique_handles, unique_labels, 
+                title=cat, 
+                fontsize=10, 
+                loc="lower right",
+                framealpha=0.9)
+        if xlim:
+            ax.set_xlim(xlim)
+        
+        plt.tight_layout()
+        plt.show()
     
     return total_allele_hit_sum_df
 
