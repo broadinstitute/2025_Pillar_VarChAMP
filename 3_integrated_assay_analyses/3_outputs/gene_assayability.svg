@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="568.939372pt" height="552.59867pt" viewBox="0 0 568.939372 552.59867" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-01-07T16:17:53.330589</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.7.5, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 552.59867 
+L 568.939372 552.59867 
+L 568.939372 0 
+L 0 0 
+L 0 552.59867 
+z
+" style="fill: none"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 319.434699 100.379762 
+C 294.78225 100.379762 270.402875 105.561758 247.881743 115.588813 
+C 225.36061 125.615867 205.196651 140.265843 188.700944 158.586183 
+L 319.434699 276.299374 
+z
+" style="fill: #ededed"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 188.700944 158.586183 
+C 159.620242 190.883577 143.515084 232.838953 143.515086 276.299382 
+C 143.515088 319.759812 159.62025 361.715186 188.700955 394.012577 
+L 319.434699 276.299374 
+z
+" style="fill: #d1d1d1"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 188.700955 394.012577 
+C 207.276418 414.642718 230.474012 430.58598 256.390759 440.534485 
+C 282.307506 450.48299 310.214803 454.157053 337.823321 451.255279 
+C 365.431838 448.353504 391.965412 438.95747 415.247402 423.837965 
+C 438.529393 408.71846 457.905269 388.300542 471.785563 364.259161 
+L 319.434699 276.299374 
+z
+" style="fill: #adadad"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 471.785563 364.259161 
+C 487.224582 337.517989 495.354315 307.177393 495.354311 276.299349 
+C 495.354307 245.421306 487.224564 215.080712 471.785538 188.339544 
+C 456.346512 161.598376 434.135652 139.387523 407.394479 123.948506 
+C 380.653306 108.509488 350.312709 100.379756 319.434666 100.379762 
+L 319.434699 276.299374 
+z
+" style="fill: #828282"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="text_1">
+    <text style="font: 12px 'Arial'" transform="translate(122.003322 96.063257)">Assayable in 3 assays</text>
+    <text style="font: 12px 'Arial'" transform="translate(185.370822 109.071632)">(4, 13.3%)</text>
+   </g>
+   <g id="text_2">
+    <text style="font: 12px 'Arial'" transform="translate(7.2 272.844883)">Assayable in 2 assays</text>
+    <text style="font: 12px 'Arial'" transform="translate(70.5675 285.853258)">(7, 23.3%)</text>
+   </g>
+   <g id="text_3">
+    <text style="font: 12px 'Arial'" transform="translate(339.662183 465.296369)">Assayable in 1 assay</text>
+    <text style="font: 12px 'Arial'" transform="translate(339.662183 478.304744)">(9, 30.0%)</text>
+   </g>
+   <g id="text_4">
+    <text style="font: 12px 'Arial'" transform="translate(487.020622 176.071249)">No phenotype</text>
+    <text style="font: 12px 'Arial'" transform="translate(487.020622 189.079624)">(10, 33.3%)</text>
+   </g>
+  </g>
+ </g>
+</svg>
