@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="351.138928pt" height="326.497502pt" viewBox="0 0 351.138928 326.497502" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="352.415794pt" height="328.864747pt" viewBox="0 0 352.415794 328.864747" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-01-08T03:02:39.181392</dc:date>
+    <dc:date>2026-01-16T17:32:46.645085</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
-      <dc:title>Matplotlib v3.7.5, https://matplotlib.org/</dc:title>
+      <dc:title>Matplotlib v3.9.4, https://matplotlib.org/</dc:title>
      </cc:Agent>
     </dc:creator>
    </cc:Work>
@@ -21,68 +21,68 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 326.497502 
-L 351.138928 326.497502 
-L 351.138928 0 
+   <path d="M 0 328.864747 
+L 352.415794 328.864747 
+L 352.415794 0 
 L 0 0 
-L 0 326.497502 
+L 0 328.864747 
 z
 " style="fill: none"/>
   </g>
   <g id="axes_1">
    <g id="patch_2">
-    <path d="M 172.593415 66.724395 
-C 159.066997 66.724395 145.690409 69.567677 133.333412 75.069367 
-C 120.976414 80.571057 109.912761 88.609272 100.861821 98.66136 
-L 172.593415 163.248772 
+    <path d="M 170.694901 64.691966 
+C 156.717769 64.691966 142.895461 67.629989 130.126715 73.315 
+C 117.35797 79.000012 105.925664 87.306068 96.573137 97.693102 
+L 170.694901 164.432638 
 z
 " style="fill: #f1f1f1"/>
    </g>
    <g id="patch_3">
-    <path d="M 100.861821 98.66136 
-C 84.905688 116.382442 76.069037 139.40271 76.069038 163.248777 
-C 76.069039 187.094844 84.905692 210.11511 100.861827 227.836191 
-L 172.593415 163.248772 
+    <path d="M 96.573145 97.693094 
+C 87.220614 108.080128 80.155062 120.318029 75.835889 133.611071 
+C 71.516717 146.904114 70.039614 160.957808 71.500618 174.858374 
+L 170.694901 164.432638 
 z
 " style="fill: #c3c3c3"/>
    </g>
    <g id="patch_4">
-    <path d="M 100.861827 227.836191 
-C 111.053897 239.15563 123.782059 247.903452 138.002178 253.362044 
-C 152.222297 258.820635 167.534601 260.836537 182.682968 259.244378 
-C 197.831336 257.652219 212.389898 252.49676 225.164367 244.200921 
-C 237.938836 235.905082 248.570081 224.702085 256.185983 211.51095 
-L 172.593415 163.248772 
+    <path d="M 71.500618 174.858374 
+C 73.701977 195.802898 82.481314 215.521617 96.573133 231.172169 
+C 110.664952 246.822722 129.357946 257.615128 149.957628 261.993733 
+C 170.557309 266.372332 192.023874 264.116118 211.263046 255.550296 
+C 230.502216 246.984474 246.542898 232.541388 257.072849 214.302991 
+L 170.694901 164.432638 
 z
 " style="fill: #969696"/>
    </g>
    <g id="patch_5">
-    <path d="M 256.185983 211.51095 
-C 264.657135 196.838482 269.117794 180.191065 269.117792 163.248759 
-C 269.117789 146.306452 264.657125 129.659037 256.18597 114.986571 
-C 247.714815 100.314104 235.528058 88.127352 220.855589 79.656201 
-C 206.18312 71.185051 189.535703 66.724392 172.593397 66.724395 
-L 172.593415 163.248772 
+    <path d="M 257.072849 214.302991 
+C 265.826272 199.141623 270.435567 181.939509 270.435573 164.432668 
+C 270.435573 146.925826 265.826296 129.723711 257.072879 114.562338 
+C 248.319462 99.400964 235.726605 86.808107 220.565237 78.054684 
+C 205.403869 69.301261 188.201756 64.691966 170.694915 64.691966 
+L 170.694901 164.432638 
 z
 " style="fill: #696969"/>
    </g>
    <g id="matplotlib.axis_1"/>
    <g id="matplotlib.axis_2"/>
    <g id="text_1">
-    <text style="font: 12px 'Arial'" transform="translate(80.483886 59.26975)">3 assays</text>
-    <text style="font: 12px 'Arial'" transform="translate(72.481386 72.278125)">(4, 13.3%)</text>
+    <text style="font: 12px 'Arial'" transform="translate(77.094039 57.104034)">3 assays</text>
+    <text style="font: 12px 'Arial'" transform="translate(69.091539 70.112409)">(4, 13.3%)</text>
    </g>
    <g id="text_2">
-    <text style="font: 12px 'Arial'" transform="translate(15.2025 159.794277)">2 assays</text>
-    <text style="font: 12px 'Arial'" transform="translate(7.2 172.802652)">(7, 23.3%)</text>
+    <text style="font: 12px 'Arial'" transform="translate(15.2025 125.841552)">2 assays</text>
+    <text style="font: 12px 'Arial'" transform="translate(7.2 138.849927)">(4, 13.3%)</text>
    </g>
    <g id="text_3">
-    <text style="font: 12px 'Arial'" transform="translate(184.095505 269.229262)">1 assay</text>
-    <text style="font: 12px 'Arial'" transform="translate(184.095505 282.237637)">(9, 30.0%)</text>
+    <text style="font: 12px 'Arial'" transform="translate(105.701284 272.197785)">1 assay</text>
+    <text style="font: 12px 'Arial'" transform="translate(85.025659 285.20616)">(12, 40.0%)</text>
    </g>
    <g id="text_4">
-    <text style="font: 12px 'Arial'" transform="translate(267.888928 104.75755)">No Phenotype</text>
-    <text style="font: 12px 'Arial'" transform="translate(267.888928 117.765925)">(10, 33.3%)</text>
+    <text style="font: 12px 'Arial'" transform="translate(269.165794 104.108182)">No Phenotype</text>
+    <text style="font: 12px 'Arial'" transform="translate(269.165794 117.116557)">(10, 33.3%)</text>
    </g>
   </g>
  </g>

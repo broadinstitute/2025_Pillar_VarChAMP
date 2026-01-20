@@ -430,7 +430,7 @@ def plot_assay_hit_by_category_perc(df, hit_col, cat_cols, title="", ax=None):
         ax.text(
             row["hit_perc"] + 1,
             idx,
-            f"{row['hit_perc']:.1f}%",
+            f"{row['hit_perc']:.0f}%",
             va="center",
             ha="left",
             fontweight="bold",
