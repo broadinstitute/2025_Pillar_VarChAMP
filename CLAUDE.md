@@ -163,6 +163,39 @@ conda activate varchamp
 ### Naming Conventions
 - Gene alleles: `gene_variant` = `symbol` + "_" + `aa_change` (e.g., `F9_Cys28Arg`)
 
+### Variant classification labels & colors
+
+Figures color variants by a **ClinVar / population-observation** class. These
+labels and colors are kept **consistent with the main IGVF paper repo**
+([bbi-lab/IGVF-cvfg-pillar-project](https://github.com/bbi-lab/IGVF-cvfg-pillar-project),
+Tejura et al. 2026, [bioRxiv 10.64898/2026.02.14.705848](https://doi.org/10.64898/2026.02.14.705848)):
+
+| Label | Definition | Color |
+|-------|------------|-------|
+| **PLP** | ClinVar Pathogenic / Likely pathogenic | `#CA7682` |
+| **BLB** | ClinVar Benign / Likely benign | `#1D7AAB` |
+| **Conflicting** | ClinVar conflicting classifications | `#505050` |
+| **VUS** | ClinVar "Uncertain significance" **only** | `#A0A0A0` |
+| **gnomAD** | Not in ClinVar, observed in gnomAD (has an allele frequency) | `#A0A0A0` |
+| **Unobserved** | Absent from **both** ClinVar and gnomAD | `#A0A0A0` |
+
+**IRON RULE — non-ClinVar variants are NEVER labelled "VUS".** `VUS` is reserved
+for ClinVar "Uncertain significance". A variant with no ClinVar record is
+`gnomAD` (population-observed) or `Unobserved` (absent from ClinVar and gnomAD),
+matching the main paper's definitions. The "unknown" family (VUS / gnomAD /
+Unobserved) shares the neutral gray `#A0A0A0`; use the lighter neutral `#E0E0E0`
+only if two of them must be visually distinguished in the same panel.
+
+- Determine class from `clinvar_clnsig_clean_pp_strict` (ClinVar tier),
+  `clinvar_sig_2025` (ClinVar record present?) and `gnomad_MAF` (in gnomAD?).
+  Matching must be **case-insensitive** so `Likely pathogenic`/`Likely benign`
+  group into PLP/BLB (see the F9 correlation figure in
+  `2_dms_bms_overlap_analyses/imaging/2_analyses/F9_analyses/1_F9_visualizations.ipynb`).
+- The upstream `clinvar_clnsig_clean*` "Others" bucket is **not** a single
+  class: it mixes not-in-ClinVar variants with in-ClinVar-but-non-standard
+  calls (`not provided`, `other`, `risk factor`, …). Do not equate "Others"
+  with "Unobserved" — resolve using ClinVar-record + gnomAD presence.
+
 ---
 
 ## Running Analyses

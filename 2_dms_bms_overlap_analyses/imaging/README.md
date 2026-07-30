@@ -77,6 +77,28 @@ All figures are saved to `3_outputs/pillar_manuscript_figures/`:
 - `F9_variant_heatmap.svg` - Z-score feature heatmap
 - `cell_crops/*.svg` - Individual cell crop images
 
+## Variant classification labels (ClinVar / observation)
+
+The `F9_MAVE_Img_Corr.svg` scatter colors variants by ClinVar / population
+class, kept **consistent with the main IGVF paper repo**
+([bbi-lab/IGVF-cvfg-pillar-project](https://github.com/bbi-lab/IGVF-cvfg-pillar-project),
+Tejura et al. 2026):
+
+| Label | Definition | Color |
+|-------|------------|-------|
+| PLP | ClinVar Pathogenic / Likely pathogenic | `#CA7682` |
+| BLB | ClinVar Benign / Likely benign | `#1D7AAB` |
+| Conflicting | ClinVar conflicting classifications | `#505050` |
+| VUS | ClinVar "Uncertain significance" only | `#A0A0A0` |
+| gnomAD | Not in ClinVar, observed in gnomAD | `#A0A0A0` |
+| Unobserved | Absent from both ClinVar and gnomAD | `#A0A0A0` |
+
+**Non-ClinVar variants are never labelled "VUS."** For F9 the two variants with
+no ClinVar record (`Cys407Arg`, `Glu73Lys`) are also absent from gnomAD, so they
+are shown as **Unobserved** (not VUS). See the full convention and rationale in
+the repo-root [`CLAUDE.md`](../../CLAUDE.md) → *Data Standards → Variant
+classification labels & colors*.
+
 ## Environment
 
 Requires the `varchamp` conda environment:
